@@ -1,6 +1,6 @@
 {% set name = "gstlal" %}
-{% set version = "1.4.1" %}
-{% set sha256 = "03b3507b99cc34b596c511040793781c2913db6e4299294d156f1d187afa5e64" %}
+{% set version = "1.5.0" %}
+{% set sha256 = "87077e24d62b63f500f51194124fb203ed21381242ee241aa13887b1f9de6d07" %}
 
 package:
   name: "{{ name|lower }}"
