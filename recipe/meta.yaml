@@ -38,8 +38,10 @@ requirements:
     - pygobject >=3.14
     - python
     - python-lal
+    - zlib
   run:
     - fftw
+    - glib
     - gsl
     - {{ pin_compatible('gstreamer') }}
     - gst-orc >=0.4
