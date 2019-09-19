@@ -7,7 +7,6 @@ package:
   version: "{{ version }}"
 
 source:
-  fn: {{ name }}-{{ version }}.tar.xz
   url: http://software.ligo.org/lscsoft/source/{{ name }}-{{ version }}.tar.gz
   sha256: {{ sha256 }}
   patches:
@@ -15,8 +14,8 @@ source:
     - python-lib-loc.patch
 
 build:
-  number: 0
-  skip: true  # [win]
+  number: 1
+  skip: true  # [win or py!=27]
 
 requirements:
   build:
@@ -37,10 +36,12 @@ requirements:
     - lalsimulation >=1.8.0
     - numpy
     - pygobject >=3.14
-    - python 2.7
+    - python
     - python-lal
+    - zlib
   run:
     - fftw
+    - glib
     - gsl
     - {{ pin_compatible('gstreamer') }}
     - gst-orc >=0.4
@@ -100,9 +101,6 @@ test:
     - gstlal_psd_xml_from_asd_txt --help
     - gstlal_reference_psd --help
     - gstlal_spectrum_movie --help
-    # check links
-    - conda inspect linkages -p ${PREFIX} ${PKG_NAME}  # [not win]
-    - conda inspect objects -p ${PREFIX} ${PKG_NAME}  # [osx]
 
 about:
   home: https://wiki.ligo.org/Computing/DASWG/GstLAL
