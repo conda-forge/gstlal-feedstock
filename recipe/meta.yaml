@@ -1,6 +1,5 @@
 {% set name = "gstlal" %}
 {% set version = "1.5.1" %}
-{% set sha256 = "92926bfc692adea418b8aaaf87663eae10970c78bf4dd0e2fd36c1b68c43392f" %}
 
 package:
   name: "{{ name|lower }}"
@@ -8,7 +7,7 @@ package:
 
 source:
   url: "http://software.ligo.org/lscsoft/source/{{ name }}-{{ version }}.tar.gz"
-  sha256: "{{ sha256 }}"
+  sha256: 92926bfc692adea418b8aaaf87663eae10970c78bf4dd0e2fd36c1b68c43392f
   patches:
     - no-pygtk.patch
     - python-lib-loc.patch
@@ -25,10 +24,10 @@ requirements:
     - pkg-config
     - make
   host:
-    - fftw >=3
+    - fftw
     - gsl
     - gstreamer 1.14.4
-    - gst-orc >=0.4
+    - gst-orc 0.4.30
     - gst-plugins-base
     - gst-python
     - lal >=6.19.0
