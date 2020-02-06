@@ -1,13 +1,13 @@
 About gstlal
 ============
 
-Home: https://wiki.ligo.org/Computing/GstLAL
+Home: https://lscsoft.docs.ligo.org/gstlal/
 
 Package license: GPL-2.0-or-later
 
 Feedstock license: BSD 3-Clause
 
-Summary: GSTLAL
+Summary: GStreamer for GW data analysis
 
 This package provides a variety of gstreamer elements for
 gravitational-wave data analysis and some libraries to help write
