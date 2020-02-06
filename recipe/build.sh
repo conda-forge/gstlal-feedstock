@@ -1,22 +1,26 @@
 #!/bin/bash
 
-# conda-forge/conda-forge.github.io#621
-find ${PREFIX} -name "*.la" -delete
-
-# shortcut version of lscsoft/gstlal@027249b601a729eb3a096e7834ee7f5a2c527f43
-export LIBS="-lz"
+set -ex
+mkdir -pv _build
+pushd _build
 
 # only link GSL libraries we actually use
 export GSL_LIBS="-L${PREFIX}/lib -lgsl"
 
 # configure
-./configure \
+${SRC_DIR}/configure \
   --prefix=${PREFIX} \
-  --without-doxygen \
-  --with-html-dir=$(pwd)/tmphtml
+  --with-doxygen=no \
+  --with-html-dir=$(pwd)/tmphtml \
+;
+
+export CPU_COUNT=1
 
 # build
-make -j ${CPU_COUNT}
+make -j ${CPU_COUNT} V=1 VERBOSE=1
 
 # install
-make -j ${CPU_COUNT} install
+make -j ${CPU_COUNT} V=1 VERBOSE=1 install
+
+# test
+make -j ${CPU_COUNT} V=1 VERBOSE=1 check
