@@ -9,13 +9,14 @@ source:
   url: "http://software.ligo.org/lscsoft/source/{{ name }}-{{ version }}.tar.gz"
   sha256: 92926bfc692adea418b8aaaf87663eae10970c78bf4dd0e2fd36c1b68c43392f
   patches:
+    - out-of-tree.patch
     - no-pygtk.patch
     - python-lib-loc.patch
 
 build:
   error_overdepending: true
   error_overlinking: true
-  number: 0
+  number: 1
   skip: true  # [win or py!=27]
 
 requirements:
@@ -26,8 +27,7 @@ requirements:
   host:
     - fftw
     - gsl
-    - gstreamer 1.14.4
-    - gst-orc 0.4.30
+    - gstreamer
     - gst-plugins-base
     - gst-python
     - lal >=6.19.0
@@ -45,8 +45,7 @@ requirements:
     - fftw
     - glib
     - gsl
-    - {{ pin_compatible('gstreamer') }}
-    - gst-orc >=0.4
+    - gstreamer
     - gst-plugins-base
     - gst-python
     - lal >=6.19.0
@@ -62,6 +61,7 @@ requirements:
     - pygobject >=3.14
     - python 2.7
     - python
+    - python-avahi
     - python-lal >=6.19.0
     - python-lalsimulation
     - python-ligo-lw >=1.5.3
@@ -71,29 +71,34 @@ test:
     - gstlal
     - gstlal.bottle
     - gstlal.coherent_null
+    - gstlal.dagfile
     - gstlal.datasource
     - gstlal.elements
-    #- gstlal.matplotlibhelper - broken, see lscsoft/gstlal#15
+    - gstlal.httpinterface
+    - gstlal.matplotlibhelper
     - gstlal.misc
     #- gstlal.multirate_datasource - requires GSTLAL_FIR_WHITEN variable, see below
     - gstlal.pipeio
+    - gstlal.pipeline
     - gstlal.pipeparts
     - gstlal.plotpsd
     - gstlal.plotutil
     - gstlal.reference_psd
+    - gstlal.servicediscovery
     - gstlal.simplehandler
     - gstlal.simulation
     - gstlal.stats
+  requires:
+    - pkg-config
   commands:
     # set variables
     - export TMPDIR=$(python -c "import tempfile; print(tempfile.gettempdir())")
     - export GSTLAL_FIR_WHITEN=0
-    # check last import
+    # check last import (which requires GSTLAL_FIR_WHITEN)
     - ${PYTHON} -c "import gstlal.multirate_datasource"
     # check executables
     - gstlal_asd_txt_from_psd_xml --help
     - gstlal_fake_frames --help
-    #- gstlal_fake_frames_pipe --help <requires gstlal-ugly>
     - gstlal_launch --help
     - gstlal_ligo_data_find_check --help
     - gstlal_play --help
@@ -103,15 +108,17 @@ test:
     - gstlal_psd_xml_from_asd_txt --help
     - gstlal_reference_psd --help
     - gstlal_spectrum_movie --help
+    # check pkg-config
+    - pkg-config --print-errors --modversion gstlal  # [unix]
 
 about:
-  home: "https://wiki.ligo.org/Computing/GstLAL"
+  home: "https://lscsoft.docs.ligo.org/gstlal/"
   dev_url: "https://git.ligo.org/lscsoft/gstlal/"
-  doc_url: "https://docs.ligo.org/lscsoft/gstlal/{{ name }}/{{ name }}.html"
+  doc_url: "https://lscsoft.docs.ligo.org/gstlal/"
   license: "GPL-2.0-or-later"
   license_family: "GPL"
   license_file: "COPYING"
-  summary: "GSTLAL"
+  summary: "GStreamer for GW data analysis"
   description: |
     This package provides a variety of gstreamer elements for
     gravitational-wave data analysis and some libraries to help write

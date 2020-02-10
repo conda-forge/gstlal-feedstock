@@ -25,7 +25,7 @@
 -else
 -	as_fn_error $? "libpython2.7.so not found" "$LINENO" 5
 -fi
-+PYTHON_LIB_SUFFIX=`${SHLIB_EXT} | cut -c2-`
++PYTHON_LIB_SUFFIX=`echo ${SHLIB_EXT} | cut -c2-`
 +PYTHON_LIB_LOC=${PREFIX}/lib
 
 
