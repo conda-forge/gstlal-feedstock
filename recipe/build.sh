@@ -14,7 +14,6 @@ ${SRC_DIR}/configure \
   --enable-introspection=yes \
   --prefix=${PREFIX} \
   --with-doxygen=no \
-  --with-html-dir=$(pwd)/tmphtml \
   --with-zlib=${PREFIX} \
 ;
 
@@ -24,5 +23,5 @@ make -j ${CPU_COUNT} V=1 VERBOSE=1
 # install
 make -j ${CPU_COUNT} V=1 VERBOSE=1 install
 
-# test - `lal_checktimestamps+lal_checktimestamps0` still fails
+# some tests fail
 #make -j ${CPU_COUNT} V=1 VERBOSE=1 check
