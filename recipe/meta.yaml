@@ -16,8 +16,8 @@ source:
 build:
   error_overdepending: true
   error_overlinking: true
-  number: 1
-  skip: true  # [win or py!=27]
+  number: 2
+  skip: true  # [win or py>=30]
 
 requirements:
   build:
@@ -29,6 +29,7 @@ requirements:
     - gsl
     - gstreamer
     - gst-plugins-base
+    - gst-plugins-good
     - gst-python
     - lal >=6.19.0
     - lalmetaio >=1.4.0
@@ -47,6 +48,7 @@ requirements:
     - gsl
     - gstreamer
     - gst-plugins-base
+    - gst-plugins-good
     - gst-python
     - lal >=6.19.0
     - lalmetaio >=1.4.0
