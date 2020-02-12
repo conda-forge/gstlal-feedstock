@@ -26,10 +26,10 @@ requirements:
     - make
   host:
     - fftw
+    - gobject-introspection
     - gsl
     - gstreamer
     - gst-plugins-base
-    - gst-plugins-good
     - gst-python
     - lal >=6.19.0
     - lalmetaio >=1.4.0

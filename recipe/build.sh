@@ -9,12 +9,14 @@ export GSL_LIBS="-L${PREFIX}/lib -lgsl"
 
 # configure
 ${SRC_DIR}/configure \
+  --enable-gtk-doc-html=no \
+  --enable-gtk-doc-pdf=no \
+  --enable-introspection=yes \
   --prefix=${PREFIX} \
   --with-doxygen=no \
   --with-html-dir=$(pwd)/tmphtml \
+  --with-zlib=${PREFIX} \
 ;
-
-export CPU_COUNT=1
 
 # build
 make -j ${CPU_COUNT} V=1 VERBOSE=1
