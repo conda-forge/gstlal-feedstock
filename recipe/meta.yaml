@@ -1,5 +1,5 @@
 {% set name = "gstlal" %}
-{% set version = "1.5.1" %}
+{% set version = "1.6.0" %}
 
 package:
   name: "{{ name|lower }}"
@@ -7,7 +7,7 @@ package:
 
 source:
   url: "http://software.ligo.org/lscsoft/source/{{ name }}-{{ version }}.tar.gz"
-  sha256: 92926bfc692adea418b8aaaf87663eae10970c78bf4dd0e2fd36c1b68c43392f
+  sha256: 53d0679a5167f1fd189d612e67042bcabae40f580d849e12f237497b794f0973
   patches:
     - out-of-tree.patch
     - no-pygtk.patch
@@ -26,7 +26,7 @@ requirements:
     - make
   host:
     - fftw
-    - gobject-introspection
+    - gobject-introspection >=1.30.0
     - gsl
     - gstreamer
     - gst-plugins-base
@@ -45,6 +45,7 @@ requirements:
   run:
     - fftw
     - glib
+    - gobject-introspection >=1.30.0
     - gsl
     - gstreamer
     - gst-plugins-base
@@ -67,6 +68,7 @@ requirements:
     - python-lal >=6.19.0
     - python-lalsimulation
     - python-ligo-lw >=1.5.3
+    - scipy
 
 test:
   imports:
