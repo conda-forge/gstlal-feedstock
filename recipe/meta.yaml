@@ -26,7 +26,7 @@ requirements:
     - make
   host:
     - fftw
-    - gobject-introspection
+    - gobject-introspection >=1.30.0
     - gsl
     - gstreamer
     - gst-plugins-base
@@ -45,6 +45,7 @@ requirements:
   run:
     - fftw
     - glib
+    - gobject-introspection >=1.30.0
     - gsl
     - gstreamer
     - gst-plugins-base
@@ -67,6 +68,7 @@ requirements:
     - python-lal >=6.19.0
     - python-lalsimulation
     - python-ligo-lw >=1.5.3
+    - scipy
 
 test:
   imports:
