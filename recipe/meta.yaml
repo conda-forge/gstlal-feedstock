@@ -19,13 +19,14 @@ source:
   url: https://software.igwn.org/sources/source/{{ name }}-{{ version }}.tar.gz
   sha256: ccb7b5cf8ce5df79cc84ded4d7c6e5e030afcfb91f0b2c92a247193f35d5d21a
   patches:
-    - out-of-tree.patch
     - no-pygtk.patch
-    - python-lib-loc.patch
 
 build:
   error_overdepending: true
   error_overlinking: true
+  ignore_run_exports:
+    - gobject-introspection
+    - gst-python
   number: 0
   skip: true  # [win]
 
@@ -41,11 +42,12 @@ requirements:
     - gstreamer
     - gst-plugins-base
     - gst-python
-    - lal >={{ lal_version }}
-    - lalmetaio >={{ lalmetaio_version }}
-    - lalburst >={{ lalburst_version }}
-    - lalinspiral >={{ lalinspiral_version }}
-    - lalsimulation >={{ lalsimulation_version }}
+    - libglib
+    - liblal >={{ lal_version }}
+    - liblalmetaio >={{ lalmetaio_version }}
+    - liblalburst >={{ lalburst_version }}
+    - liblalinspiral >={{ lalinspiral_version }}
+    - liblalsimulation >={{ lalsimulation_version }}
     - numpy
     - pygobject >=3.22
     - python
@@ -54,7 +56,6 @@ requirements:
     - zlib
   run:
     - fftw
-    - glib
     - gobject-introspection >=1.30.0
     - gsl
     - gstreamer
@@ -66,6 +67,7 @@ requirements:
     - lalburst >={{ lalburst_version }}
     - lalinspiral >={{ lalinspiral_version }}
     - lalsimulation >={{ lalsimulation_version }}
+    - libglib
     - ligo-segments >={{ ligo_segments_version }}
     - lscsoft-glue >={{ lscsoft_glue_version }}
     - matplotlib-base
