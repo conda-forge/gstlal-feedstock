@@ -28,7 +28,8 @@ build:
     - gobject-introspection
     - gst-python
   number: 0
-  skip: true  # [win]
+  # SyntaxErrors on python>=3.7 use of 'async' reserved keyword
+  skip: true  # [win or py>36]
 
 requirements:
   build:
