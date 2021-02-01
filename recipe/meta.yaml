@@ -89,6 +89,7 @@ test:
     - gstlal.bottle
     - gstlal.coherent_null
     - gstlal.dagfile
+    #- gstlal.dagparts - requires TMPDIR for some reason
     - gstlal.datasource
     - gstlal.elements
     - gstlal.httpinterface
@@ -97,9 +98,10 @@ test:
     #- gstlal.multirate_datasource - requires GSTLAL_FIR_WHITEN variable, see below
     - gstlal.pipeio
     - gstlal.pipeline
-    - gstlal.pipeparts
-    - gstlal.plotpsd
-    - gstlal.plotutil
+    - gstlal.pipeutil
+    - gstlal.plots
+    - gstlal.plots.psd
+    - gstlal.plots.util
     - gstlal.reference_psd
     - gstlal.servicediscovery
     - gstlal.simplehandler
@@ -115,7 +117,9 @@ test:
     - ${PYTHON} -c "import gstlal.multirate_datasource"
     # check executables
     - gstlal_asd_txt_from_psd_xml --help
+    - gstlal_dagfile_rerun_relatives --help
     - gstlal_fake_frames --help
+    #- gstlal_fake_frames_pipe --help  - needs gstlal-ugly!!!
     - gstlal_launch --help
     - gstlal_ligo_data_find_check --help
     - gstlal_play --help
@@ -125,6 +129,7 @@ test:
     - gstlal_psd_xml_from_asd_txt --help
     - gstlal_reference_psd --help
     - gstlal_spectrum_movie --help
+    - gstlal_stage_frames --help
     # check pkg-config
     - pkg-config --print-errors --modversion gstlal  # [unix]
 
