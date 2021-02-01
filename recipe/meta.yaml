@@ -1,13 +1,23 @@
 {% set name = "gstlal" %}
-{% set version = "1.6.0" %}
+{% set version = "1.8.0" %}
+
+# requirements
+{% set lal_version = "7.1.0" %}
+{% set lalmetaio_version = "2.0.0" %}
+{% set lalsimulation_version = "2.5.0" %}
+{% set lalburst_version = "1.5.0" %}
+{% set lalinspiral_version = "2.0.0" %}
+{% set ligo_segments_version = "1.2.0" %}
+{% set lscsoft_glue_version = "2.0.0" %}
+{% set python_ligo_lw_version = "1.6.0" %}
 
 package:
-  name: "{{ name|lower }}"
-  version: "{{ version }}"
+  name: {{ name|lower }}
+  version: {{ version }}
 
 source:
-  url: "http://software.ligo.org/lscsoft/source/{{ name }}-{{ version }}.tar.gz"
-  sha256: 53d0679a5167f1fd189d612e67042bcabae40f580d849e12f237497b794f0973
+  url: https://software.igwn.org/sources/source/{{ name }}-{{ version }}.tar.gz
+  sha256: ccb7b5cf8ce5df79cc84ded4d7c6e5e030afcfb91f0b2c92a247193f35d5d21a
   patches:
     - out-of-tree.patch
     - no-pygtk.patch
@@ -16,13 +26,13 @@ source:
 build:
   error_overdepending: true
   error_overlinking: true
-  number: 2
-  skip: true  # [win or py>=30]
+  number: 0
+  skip: true  # [win]
 
 requirements:
   build:
     - {{ compiler('c') }}
-    - pkg-config
+    - pkg-config >=0.18.0
     - make
   host:
     - fftw
@@ -31,16 +41,16 @@ requirements:
     - gstreamer
     - gst-plugins-base
     - gst-python
-    - lal >=6.19.0
-    - lalmetaio >=1.4.0
-    - lalburst >=1.5.0
-    - lalinspiral >=1.8.0
-    - lalsimulation >=1.8.0
+    - lal >={{ lal_version }}
+    - lalmetaio >={{ lalmetaio_version }}
+    - lalburst >={{ lalburst_version }}
+    - lalinspiral >={{ lalinspiral_version }}
+    - lalsimulation >={{ lalsimulation_version }}
     - numpy
     - pygobject >=3.22
     - python
     - python-lal
-    - python-ligo-lw >=1.5.3
+    - python-ligo-lw >={{ python_ligo_lw_version }}
     - zlib
   run:
     - fftw
@@ -51,13 +61,13 @@ requirements:
     - gst-plugins-base
     - gst-plugins-good
     - gst-python
-    - lal >=6.19.0
-    - lalmetaio >=1.4.0
-    - lalburst >=1.5.0
-    - lalinspiral >=1.8.0
-    - lalsimulation >=1.8.0
-    - ligo-segments >=1.2.0
-    - lscsoft-glue >=2.0.0
+    - lal >={{ lal_version }}
+    - lalmetaio >={{ lalmetaio_version }}
+    - lalburst >={{ lalburst_version }}
+    - lalinspiral >={{ lalinspiral_version }}
+    - lalsimulation >={{ lalsimulation_version }}
+    - ligo-segments >={{ ligo_segments_version }}
+    - lscsoft-glue >={{ lscsoft_glue_version }}
     - matplotlib-base
     - {{ pin_compatible('numpy') }}
     - pyfftw
@@ -65,9 +75,9 @@ requirements:
     - python 2.7
     - python
     - python-avahi
-    - python-lal >=6.19.0
+    - python-lal >={{ lal_version }}
     - python-lalsimulation
-    - python-ligo-lw >=1.5.3
+    - python-ligo-lw >={{ python_ligo_lw_version }}
     - scipy
 
 test:
