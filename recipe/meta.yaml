@@ -20,13 +20,11 @@ source:
   sha256: ccb7b5cf8ce5df79cc84ded4d7c6e5e030afcfb91f0b2c92a247193f35d5d21a
   patches:
     - no-pygtk.patch
+    - no-link-libpython.patch  # [osx]
 
 build:
   error_overdepending: true
   error_overlinking: true
-  ignore_run_exports:
-    - gobject-introspection
-    - gst-python
   number: 0
   # SyntaxErrors on python>=3.7 use of 'async' reserved keyword
   skip: true  # [win or py>36]
@@ -63,23 +61,22 @@ requirements:
     - gst-plugins-base
     - gst-plugins-good
     - gst-python
-    - lal >={{ lal_version }}
-    - lalmetaio >={{ lalmetaio_version }}
-    - lalburst >={{ lalburst_version }}
-    - lalinspiral >={{ lalinspiral_version }}
-    - lalsimulation >={{ lalsimulation_version }}
     - libglib
+    - liblal >={{ lal_version }}
+    - liblalmetaio >={{ lalmetaio_version }}
+    - liblalburst >={{ lalburst_version }}
+    - liblalinspiral >={{ lalinspiral_version }}
+    - liblalsimulation >={{ lalsimulation_version }}
     - ligo-segments >={{ ligo_segments_version }}
     - lscsoft-glue >={{ lscsoft_glue_version }}
     - matplotlib-base
     - {{ pin_compatible('numpy') }}
     - pyfftw
     - pygobject >=3.14
-    - python 2.7
     - python
     - python-avahi
     - python-lal >={{ lal_version }}
-    - python-lalsimulation
+    - python-lalsimulation >={{ lalsimulation_version }}
     - python-ligo-lw >={{ python_ligo_lw_version }}
     - scipy
 
