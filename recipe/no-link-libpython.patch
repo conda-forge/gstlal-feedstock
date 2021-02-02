@@ -1,0 +1,30 @@
+--- configure	2021-01-28 20:56:06.000000000 +0000
++++ configure	2021-02-02 15:40:06.000000000 +0000
+@@ -13457,16 +13457,6 @@
+
+
+ #
+-# LDFLAGS
+-#
+-
+-
+-# Turn on error messages for undefined symbols
+-AM_LDFLAGS="$AM_LDFLAGS -no-undefined"
+-
+-
+-
+-#
+ # Check for math library
+ #
+
+--- python/Makefile.in	2021-01-28 20:56:06.000000000 +0000
++++ python/Makefile.in	2021-02-02 15:19:56.000000000 +0000
+@@ -483,7 +483,7 @@
+ _misc_la_SOURCES = misc.c
+ _misc_la_CPPFLAGS = $(AM_CPPFLAGS) $(PYTHON_CPPFLAGS)
+ _misc_la_LIBADD = $(top_builddir)/lib/gstlal/libgstlal.la
+-_misc_la_LDFLAGS = $(AM_LDFLAGS) $(PYTHON_LIBS) -module -avoid-version
++_misc_la_LDFLAGS = $(AM_LDFLAGS) -undefined dynamic_lookup -module -avoid-version
+ all: all-recursive
+
+ .SUFFIXES:

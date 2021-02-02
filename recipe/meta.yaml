@@ -1,28 +1,43 @@
 {% set name = "gstlal" %}
-{% set version = "1.6.0" %}
+{% set version = "1.8.0" %}
+
+# requirements
+{% set lal_version = "7.1.0" %}
+{% set lalmetaio_version = "2.0.0" %}
+{% set lalsimulation_version = "2.5.0" %}
+{% set lalburst_version = "1.5.0" %}
+{% set lalinspiral_version = "2.0.0" %}
+{% set ligo_segments_version = "1.2.0" %}
+{% set lscsoft_glue_version = "2.0.0" %}
+{% set python_ligo_lw_version = "1.6.0" %}
 
 package:
-  name: "{{ name|lower }}"
-  version: "{{ version }}"
+  name: {{ name|lower }}
+  version: {{ version }}
 
 source:
-  url: "http://software.ligo.org/lscsoft/source/{{ name }}-{{ version }}.tar.gz"
-  sha256: 53d0679a5167f1fd189d612e67042bcabae40f580d849e12f237497b794f0973
+  url: https://software.igwn.org/sources/source/{{ name }}-{{ version }}.tar.gz
+  sha256: ccb7b5cf8ce5df79cc84ded4d7c6e5e030afcfb91f0b2c92a247193f35d5d21a
   patches:
-    - out-of-tree.patch
     - no-pygtk.patch
-    - python-lib-loc.patch
+    - no-link-libpython.patch  # [osx]
 
 build:
   error_overdepending: true
   error_overlinking: true
-  number: 2
-  skip: true  # [win or py>=30]
+  ignore_run_exports:
+    # these are needed for the build, and at runtime,
+    # but aren't actually directly linked against
+    - gobject-introspection
+    - gst-python
+  number: 0
+  # SyntaxErrors on python>=3.7 use of 'async' reserved keyword
+  skip: true  # [win or py>36]
 
 requirements:
   build:
     - {{ compiler('c') }}
-    - pkg-config
+    - pkg-config >=0.18.0
     - make
   host:
     - fftw
@@ -31,43 +46,43 @@ requirements:
     - gstreamer
     - gst-plugins-base
     - gst-python
-    - lal >=6.19.0
-    - lalmetaio >=1.4.0
-    - lalburst >=1.5.0
-    - lalinspiral >=1.8.0
-    - lalsimulation >=1.8.0
+    - libglib
+    - liblal >={{ lal_version }}
+    - liblalmetaio >={{ lalmetaio_version }}
+    - liblalburst >={{ lalburst_version }}
+    - liblalinspiral >={{ lalinspiral_version }}
+    - liblalsimulation >={{ lalsimulation_version }}
     - numpy
     - pygobject >=3.22
     - python
     - python-lal
-    - python-ligo-lw >=1.5.3
+    - python-ligo-lw >={{ python_ligo_lw_version }}
     - zlib
   run:
     - fftw
-    - glib
     - gobject-introspection >=1.30.0
     - gsl
     - gstreamer
     - gst-plugins-base
     - gst-plugins-good
     - gst-python
-    - lal >=6.19.0
-    - lalmetaio >=1.4.0
-    - lalburst >=1.5.0
-    - lalinspiral >=1.8.0
-    - lalsimulation >=1.8.0
-    - ligo-segments >=1.2.0
-    - lscsoft-glue >=2.0.0
+    - libglib
+    - liblal >={{ lal_version }}
+    - liblalmetaio >={{ lalmetaio_version }}
+    - liblalburst >={{ lalburst_version }}
+    - liblalinspiral >={{ lalinspiral_version }}
+    - liblalsimulation >={{ lalsimulation_version }}
+    - ligo-segments >={{ ligo_segments_version }}
+    - lscsoft-glue >={{ lscsoft_glue_version }}
     - matplotlib-base
     - {{ pin_compatible('numpy') }}
     - pyfftw
     - pygobject >=3.14
-    - python 2.7
     - python
     - python-avahi
-    - python-lal >=6.19.0
-    - python-lalsimulation
-    - python-ligo-lw >=1.5.3
+    - python-lal >={{ lal_version }}
+    - python-lalsimulation >={{ lalsimulation_version }}
+    - python-ligo-lw >={{ python_ligo_lw_version }}
     - scipy
 
 test:
@@ -76,6 +91,7 @@ test:
     - gstlal.bottle
     - gstlal.coherent_null
     - gstlal.dagfile
+    #- gstlal.dagparts - requires TMPDIR for some reason
     - gstlal.datasource
     - gstlal.elements
     - gstlal.httpinterface
@@ -84,9 +100,10 @@ test:
     #- gstlal.multirate_datasource - requires GSTLAL_FIR_WHITEN variable, see below
     - gstlal.pipeio
     - gstlal.pipeline
-    - gstlal.pipeparts
-    - gstlal.plotpsd
-    - gstlal.plotutil
+    - gstlal.pipeutil
+    - gstlal.plots
+    - gstlal.plots.psd
+    - gstlal.plots.util
     - gstlal.reference_psd
     - gstlal.servicediscovery
     - gstlal.simplehandler
@@ -102,7 +119,9 @@ test:
     - ${PYTHON} -c "import gstlal.multirate_datasource"
     # check executables
     - gstlal_asd_txt_from_psd_xml --help
+    - gstlal_dagfile_rerun_relatives --help
     - gstlal_fake_frames --help
+    #- gstlal_fake_frames_pipe --help  - needs gstlal-ugly!!!
     - gstlal_launch --help
     - gstlal_ligo_data_find_check --help
     - gstlal_play --help
@@ -112,6 +131,7 @@ test:
     - gstlal_psd_xml_from_asd_txt --help
     - gstlal_reference_psd --help
     - gstlal_spectrum_movie --help
+    - gstlal_stage_frames --help
     # check pkg-config
     - pkg-config --print-errors --modversion gstlal  # [unix]
 
