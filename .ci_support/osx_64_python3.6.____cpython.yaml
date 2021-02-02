@@ -13,9 +13,9 @@ fftw:
 gsl:
 - '2.6'
 gst_plugins_base:
-- 1.14.4
+- '1.18'
 gstreamer:
-- 1.14.4
+- '1.18'
 macos_machine:
 - x86_64-apple-darwin13.4.0
 numpy:
