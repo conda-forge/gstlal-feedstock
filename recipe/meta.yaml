@@ -25,6 +25,11 @@ source:
 build:
   error_overdepending: true
   error_overlinking: true
+  ignore_run_exports:
+    # these are needed for the build, and at runtime,
+    # but aren't actually directly linked against
+    - gobject-introspection
+    - gst-python
   number: 0
   # SyntaxErrors on python>=3.7 use of 'async' reserved keyword
   skip: true  # [win or py>36]
