@@ -30,7 +30,7 @@ build:
     # but aren't actually directly linked against
     - gobject-introspection
     - gst-python
-  number: 0
+  number: 1
   # SyntaxErrors on python>=3.7 use of 'async' reserved keyword
   skip: true  # [win or py>36]
 
