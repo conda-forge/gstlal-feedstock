@@ -1,5 +1,5 @@
 {% set name = "gstlal" %}
-{% set version = "1.8.0" %}
+{% set version = "1.9.0" %}
 
 # requirements
 {% set lal_version = "7.1.0" %}
@@ -17,7 +17,7 @@ package:
 
 source:
   url: https://software.igwn.org/sources/source/{{ name }}-{{ version }}.tar.gz
-  sha256: ccb7b5cf8ce5df79cc84ded4d7c6e5e030afcfb91f0b2c92a247193f35d5d21a
+  sha256: cc2691ec3346ccc406cddb6aa7cef550ca24f8359a206bc389a716e3e05f498b
   patches:
     - no-pygtk.patch
     - no-link-libpython.patch  # [osx]
@@ -30,7 +30,7 @@ build:
     # but aren't actually directly linked against
     - gobject-introspection
     - gst-python
-  number: 1
+  number: 0
   # SyntaxErrors on python>=3.7 use of 'async' reserved keyword
   skip: true  # [win or py>36]
 
@@ -136,13 +136,13 @@ test:
     - pkg-config --print-errors --modversion gstlal  # [unix]
 
 about:
-  home: "https://lscsoft.docs.ligo.org/gstlal/"
-  dev_url: "https://git.ligo.org/lscsoft/gstlal/"
-  doc_url: "https://lscsoft.docs.ligo.org/gstlal/"
-  license: "GPL-2.0-or-later"
-  license_family: "GPL"
-  license_file: "COPYING"
-  summary: "GStreamer for GW data analysis"
+  home: https://lscsoft.docs.ligo.org/gstlal/
+  dev_url: https://git.ligo.org/lscsoft/gstlal/
+  doc_url: https://lscsoft.docs.ligo.org/gstlal/
+  license: GPL-2.0-or-later
+  license_family: GPL
+  license_file: COPYING
+  summary: GStreamer for GW data analysis
   description: |
     This package provides a variety of gstreamer elements for
     gravitational-wave data analysis and some libraries to help write
