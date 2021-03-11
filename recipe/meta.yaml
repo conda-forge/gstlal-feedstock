@@ -9,7 +9,7 @@
 {% set lalinspiral_version = "2.0.0" %}
 {% set ligo_segments_version = "1.2.0" %}
 {% set lscsoft_glue_version = "2.0.0" %}
-{% set python_ligo_lw_version = "1.6.0" %}
+{% set python_ligo_lw_version = "1.7.0" %}
 
 package:
   name: {{ name|lower }}
@@ -31,8 +31,7 @@ build:
     - gobject-introspection
     - gst-python
   number: 0
-  # SyntaxErrors on python>=3.7 use of 'async' reserved keyword
-  skip: true  # [win or py>36]
+  skip: true  # [win]
 
 requirements:
   build:
