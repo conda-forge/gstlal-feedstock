@@ -30,7 +30,7 @@ build:
     # but aren't actually directly linked against
     - gobject-introspection
     - gst-python
-  number: 1
+  number: 2
   skip: true  # [win]
 
 requirements:
@@ -43,6 +43,7 @@ requirements:
     - gobject-introspection >=1.30.0
     - gsl
     - gstreamer
+    - gstreamer-orc
     - gst-plugins-base
     - gst-python
     - libglib
@@ -62,6 +63,7 @@ requirements:
     - gobject-introspection >=1.30.0
     - gsl
     - gstreamer
+    - gstreamer-orc
     - gst-plugins-base
     - gst-plugins-good
     - gst-python
@@ -76,7 +78,7 @@ requirements:
     - matplotlib-base
     - {{ pin_compatible('numpy') }}
     - pyfftw
-    - pygobject >=3.14
+    - pygobject >=3.22
     - python
     - python-avahi
     - python-lal >={{ lal_version }}
@@ -153,5 +155,6 @@ about:
 
 extra:
   recipe-maintainers:
+    - aepace
     - duncanmmacleod
     - myNameIsPatrick
