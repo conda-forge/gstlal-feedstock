@@ -30,7 +30,7 @@ build:
     # but aren't actually directly linked against
     - gobject-introspection
     - gst-python
-  number: 1
+  number: 2
   skip: true  # [win]
 
 requirements:
@@ -43,6 +43,7 @@ requirements:
     - gobject-introspection >=1.30.0
     - gsl
     - gstreamer
+    - gstreamer-orc
     - gst-plugins-base
     - gst-python
     - libglib
@@ -52,7 +53,7 @@ requirements:
     - liblalinspiral >={{ lalinspiral_version }}
     - liblalsimulation >={{ lalsimulation_version }}
     - numpy
-    - pygobject >=3.22
+    - pygobject >=3.22,<3.29
     - python
     - python-lal
     - python-ligo-lw >={{ python_ligo_lw_version }}
@@ -76,7 +77,7 @@ requirements:
     - matplotlib-base
     - {{ pin_compatible('numpy') }}
     - pyfftw
-    - pygobject >=3.14
+    - pygobject >=3.22,<3.29
     - python
     - python-avahi
     - python-lal >={{ lal_version }}
