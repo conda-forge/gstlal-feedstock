@@ -4,7 +4,7 @@
 # requirements
 {% set lal_version = "7.1.0" %}
 {% set lalmetaio_version = "2.0.0" %}
-{% set lalsimulation_version = "2.4.0" %}
+{% set lalsimulation_version = "2.5.0" %}
 {% set lalburst_version = "1.5.0" %}
 {% set lalinspiral_version = "2.0.0" %}
 {% set ligo_segments_version = "1.2.0" %}
@@ -53,7 +53,7 @@ requirements:
     - liblalinspiral >={{ lalinspiral_version }}
     - liblalsimulation >={{ lalsimulation_version }}
     - numpy
-    - pygobject >=3.22,<3.29
+    - pygobject >=3.22
     - python
     - python-lal
     - python-ligo-lw >={{ python_ligo_lw_version }}
@@ -77,7 +77,7 @@ requirements:
     - matplotlib-base
     - {{ pin_compatible('numpy') }}
     - pyfftw
-    - pygobject >=3.22,<3.29
+    - pygobject >=3.22
     - python
     - python-avahi
     - python-lal >={{ lal_version }}
