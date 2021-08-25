@@ -40,6 +40,7 @@ requirements:
     - make
   host:
     - fftw
+    - glib
     - gobject-introspection >=1.30.0
     - gsl
     - gstreamer
