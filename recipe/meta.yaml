@@ -30,7 +30,7 @@ build:
     # but aren't actually directly linked against
     - gobject-introspection
     - gst-python
-  number: 2
+  number: 3
   skip: true  # [win]
 
 requirements:
@@ -40,6 +40,7 @@ requirements:
     - make
   host:
     - fftw
+    - glib
     - gobject-introspection >=1.30.0
     - gsl
     - gstreamer

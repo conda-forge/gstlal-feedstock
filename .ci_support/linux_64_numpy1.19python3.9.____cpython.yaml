@@ -12,8 +12,10 @@ docker_image:
 - quay.io/condaforge/linux-anvil-comp7
 fftw:
 - '3'
+glib:
+- '2'
 gsl:
-- '2.6'
+- '2.7'
 gst_plugins_base:
 - '1.18'
 gstreamer:
