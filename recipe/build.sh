@@ -17,11 +17,20 @@ export GSL_LIBS="-L${PREFIX}/lib -lgsl"
 # so that conda-build will then replace it with the $PREFIX/bin/python
 sed -i.tmp 's/\/usr\/bin\/env python3/\/usr\/bin\/python/g' ${SRC_DIR}/bin/gstlal_*
 
+# disable introspection when cross-compiling,
+# (cross-copmiled gstreamer doesn't support it, see
+# https://github.com/conda-forge/gstreamer-feedstock/blob/c09dab7f241742d5911603d964a362036bb963f4/recipe/install_gstreamer.sh#L8-L15
+if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" == "1" ]]; then
+    ENABLE_INTROSPECTION="no"
+else
+    ENABLE_INTROSPECTION="yes"
+fi
+
 # configure
 ${SRC_DIR}/configure \
   --enable-gtk-doc-html=no \
   --enable-gtk-doc-pdf=no \
-  --enable-introspection=yes \
+  --enable-introspection=${ENABLE_INTROSPECTION} \
   --prefix=${PREFIX} \
   --with-doxygen=no \
   --with-zlib=${PREFIX} \
