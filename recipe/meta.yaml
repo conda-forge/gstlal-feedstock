@@ -30,14 +30,21 @@ build:
     # but aren't actually directly linked against
     - gobject-introspection
     - gst-python
+    - numpy
   number: 4
   skip: true  # [win]
 
 requirements:
   build:
     - {{ compiler('c') }}
-    - pkg-config >=0.18.0
+    - gnuconfig  # [unix]
     - make
+    - pkg-config >=0.18.0
+    # extras for cross-compiling
+    - cross-python_{{ target_platform }}  # [build_platform != target_platform]
+    - numpy                               # [build_platform != target_platform]
+    - python                              # [build_platform != target_platform]
+    - python-lal                          # [build_platform != target_platform]
   host:
     - fftw
     - glib
