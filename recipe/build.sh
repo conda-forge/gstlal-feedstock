@@ -6,6 +6,10 @@ set -ex
 mkdir -pv _build
 pushd _build
 
+# ensure that pkg-config is picked up from the build environment,
+# not the host environment
+export PKG_CONFIG="${BUILD_PREFIX}/bin/pkg-config"
+
 # only link GSL libraries we actually use
 export GSL_LIBS="-L${PREFIX}/lib -lgsl"
 
