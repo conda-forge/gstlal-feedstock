@@ -30,7 +30,7 @@ build:
     # but aren't actually directly linked against
     - gobject-introspection
     - gst-python
-  number: 4
+  number: 5
   skip: true  # [win]
 
 requirements:
