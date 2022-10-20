@@ -21,6 +21,8 @@ source:
   patches:
     - no-pygtk.patch
     - no-link-libpython.patch  # [osx]
+    # see https://git.ligo.org/lscsoft/gstlal/-/issues/97
+    - collections.abc.MutableMapping.patch
 
 build:
   error_overdepending: true
@@ -31,7 +33,7 @@ build:
     - gobject-introspection
     - gst-python
     - numpy
-  number: 5
+  number: 6
   skip: true  # [win]
 
 requirements:
