@@ -1,7 +1,9 @@
 {% set name = "gstlal" %}
 {% set version = "1.10.0" %}
 
-# requirements
+# requirements (should match MIN_<> in configure.ac)
+{% set dqsegdb2_version = "1.0.1" %}
+{% set gwdatafind_version = "1.0.4" %}
 {% set lal_version = "7.1.0" %}
 {% set lalmetaio_version = "2.0.0" %}
 {% set lalsimulation_version = "2.5.0" %}
@@ -9,7 +11,9 @@
 {% set lalinspiral_version = "2.0.0" %}
 {% set ligo_segments_version = "1.2.0" %}
 {% set lscsoft_glue_version = "2.0.0" %}
-{% set python_ligo_lw_version = "1.7.0" %}
+{% set pluggy_version = "0.6.0" %}
+{% set python_condor_version = "8.9.0" %}
+{% set ligo_lw_version = "1.7.0" %}
 
 package:
   name: {{ name|lower }}
@@ -19,10 +23,10 @@ source:
   url: https://software.igwn.org/sources/source/{{ name }}-{{ version }}.tar.gz
   sha256: 1f2d173a264498a594f3709744a799237b544409a578fa676013feab3892bae6
   patches:
-    - no-pygtk.patch
-    - no-link-libpython.patch  # [osx]
+    #- no-pygtk.patch
+    #- no-link-libpython.patch  # [osx]
     # see https://git.ligo.org/lscsoft/gstlal/-/issues/97
-    - collections.abc.MutableMapping.patch
+    #- collections.abc.MutableMapping.patch
 
 build:
   error_overdepending: true
@@ -60,9 +64,10 @@ requirements:
     - pygobject >=3.22
     - python
     - python-lal
-    - python-ligo-lw >={{ python_ligo_lw_version }}
+    - python-ligo-lw >={{ ligo_lw_version }}
     - zlib
   run:
+    - dqsegdb2 >={{ dqsegdb2_version }}
     - fftw
     - gobject-introspection >=1.30.0
     - gsl
@@ -71,6 +76,8 @@ requirements:
     - gst-plugins-base
     - gst-plugins-good
     - gst-python
+    - gwdatafind >={{ gwdatafind_version }}
+    - jinja2
     - libglib
     - liblal >={{ lal_version }}
     - liblalmetaio >={{ lalmetaio_version }}
@@ -81,64 +88,47 @@ requirements:
     - lscsoft-glue >={{ lscsoft_glue_version }}
     - matplotlib-base
     - {{ pin_compatible('numpy') }}
+    - pandas
+    - pluggy >={{ pluggy_version }}
     - pyfftw
     - pygobject >=3.22
     - python
     - python-avahi
+    - python-htcondor >={{ python_condor_version }}
     - python-lal >={{ lal_version }}
     - python-lalsimulation >={{ lalsimulation_version }}
-    - python-ligo-lw >={{ python_ligo_lw_version }}
+    - python-ligo-lw >={{ ligo_lw_version }}
     - scipy
 
 test:
-  imports:
-    - gstlal
-    - gstlal.bottle
-    - gstlal.coherent_null
-    - gstlal.dagfile
-    #- gstlal.dagparts - requires TMPDIR for some reason
-    - gstlal.datasource
-    - gstlal.elements
-    - gstlal.httpinterface
-    - gstlal.matplotlibhelper
-    - gstlal.misc
-    #- gstlal.multirate_datasource - requires GSTLAL_FIR_WHITEN variable, see below
-    - gstlal.pipeio
-    - gstlal.pipeline
-    - gstlal.pipeutil
-    - gstlal.plots
-    - gstlal.plots.psd
-    - gstlal.plots.util
-    - gstlal.reference_psd
-    - gstlal.servicediscovery
-    - gstlal.simplehandler
-    - gstlal.simulation
-    - gstlal.stats
   requires:
     - pkg-config
   commands:
     # set variables
     - export TMPDIR=$(python -c "import tempfile; print(tempfile.gettempdir())")
     - export GSTLAL_FIR_WHITEN=0
-    # check last import (which requires GSTLAL_FIR_WHITEN)
-    - ${PYTHON} -c "import gstlal.multirate_datasource"
     # check executables
     - gstlal_asd_txt_from_psd_xml --help
     - gstlal_dagfile_rerun_relatives --help
     - gstlal_fake_frames --help
-    #- gstlal_fake_frames_pipe --help  - needs gstlal-ugly!!!
+    - gstlal_fake_frames_workflow --help
+    - gstlal_grid_profile --help
     - gstlal_launch --help
     - gstlal_ligo_data_find_check --help
     - gstlal_play --help
     - gstlal_plot_psd --help
     - gstlal_plot_psd_horizon --help
     - gstlal_psd_polyfit --help
+    - gstlal_psd_workflow --help
     - gstlal_psd_xml_from_asd_txt --help
+    - gstlal_query_dqsegdb_segments --help
+    - gstlal_query_dqsegdb_veto_segments --help
+    - gstlal_query_gwosc_segments --help
+    - gstlal_query_gwosc_veto_segments --help
     - gstlal_reference_psd --help
     - gstlal_spectrum_movie --help
-    - gstlal_stage_frames --help
     # check pkg-config
-    - pkg-config --print-errors --modversion gstlal  # [unix]
+    - pkg-config --print-errors --exact-version {{ version }} gstlal  # [unix]
 
 about:
   home: https://lscsoft.docs.ligo.org/gstlal/
