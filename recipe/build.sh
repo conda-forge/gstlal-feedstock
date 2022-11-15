@@ -4,12 +4,13 @@ set -ex
 mkdir -pv _build
 pushd _build
 
+# set PYTHON_LIBS for macOS (don't link against libpython)
+if [[ "$(uname)" == "Darwin" ]]; then
+  export PYTHON_LIBS="-Wl,-undefined,dynamic_lookup"
+fi
+
 # only link GSL libraries we actually use
 export GSL_LIBS="-L${PREFIX}/lib -lgsl"
-
-# replace '/usr/bin/env python3' with '/usr/bin/python'
-# so that conda-build will then replace it with the $PREFIX/bin/python
-sed -i.tmp 's/\/usr\/bin\/env python3/\/usr\/bin\/python/g' ${SRC_DIR}/bin/gstlal_*
 
 # configure
 ${SRC_DIR}/configure \
