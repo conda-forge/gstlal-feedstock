@@ -37,7 +37,7 @@ build:
     - gobject-introspection
     - gst-python
     - numpy
-  number: 0
+  number: 1
   skip: true  # [win]
 
 requirements:
