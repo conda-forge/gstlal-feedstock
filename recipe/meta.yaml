@@ -4,16 +4,15 @@
 # requirements (should match MIN_<> in configure.ac)
 {% set dqsegdb2_version = "1.0.1" %}
 {% set gwdatafind_version = "1.0.4" %}
-{% set lal_version = "7.1.0" %}
-{% set lalmetaio_version = "2.0.0" %}
-{% set lalsimulation_version = "2.5.0" %}
-{% set lalburst_version = "1.5.0" %}
-{% set lalinspiral_version = "2.0.0" %}
+{% set lal_version = "7.2.4" %}
+{% set lalmetaio_version = "3.0.2" %}
+{% set lalsimulation_version = "4.0.2" %}
+{% set lalburst_version = "1.7.0" %}
+{% set lalinspiral_version = "3.0.2" %}
 {% set ligo_segments_version = "1.2.0" %}
-{% set lscsoft_glue_version = "2.0.0" %}
 {% set pluggy_version = "0.6.0" %}
 {% set python_condor_version = "8.9.0" %}
-{% set ligo_lw_version = "1.7.0" %}
+{% set ligo_lw_version = "1.8.3" %}
 
 package:
   name: {{ name|lower }}
@@ -37,7 +36,7 @@ build:
     - gobject-introspection
     - gst-python
     - numpy
-  number: 0
+  number: 1
   skip: true  # [win]
 
 requirements:
@@ -85,7 +84,6 @@ requirements:
     - liblalinspiral >={{ lalinspiral_version }}
     - liblalsimulation >={{ lalsimulation_version }}
     - ligo-segments >={{ ligo_segments_version }}
-    - lscsoft-glue >={{ lscsoft_glue_version }}
     - matplotlib-base
     - {{ pin_compatible('numpy') }}
     - pandas
