@@ -50,7 +50,6 @@ requirements:
     - gstreamer
     - gstreamer-orc
     - gst-plugins-base  {{ gstreamer }}
-    - gst-plugins-good  {{ gstreamer }}
     - gst-python
     - libglib
     - liblal >={{ lal_version }}
@@ -70,6 +69,7 @@ requirements:
     - gobject-introspection >=1.30.0
     - gsl
     - gstreamer-orc
+    - gst-plugins-good  {{ gstreamer }}
     - gst-python
     - gwdatafind >={{ gwdatafind_version }}
     - jinja2
