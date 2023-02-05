@@ -49,7 +49,7 @@ requirements:
     - gsl
     - gstreamer
     - gstreamer-orc
-    - gst-plugins-base
+    - gst-plugins-base  {{ gstreamer }}
     - gst-python
     - libglib
     - liblal >={{ lal_version }}
