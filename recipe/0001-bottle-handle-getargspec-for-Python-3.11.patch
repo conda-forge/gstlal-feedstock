@@ -1,7 +1,7 @@
 From 0693cc5c2c588acfe4260ae30886fac8f55d4f2d Mon Sep 17 00:00:00 2001
 From: "duncan.macleod" <duncan.macleod@ligo.org>
 Date: Tue, 20 Dec 2022 10:16:01 +0000
-Subject: [PATCH] bottle: handle getargspec for Python 3.11
+Subject: [PATCH 1/2] bottle: handle getargspec for Python 3.11
 
 patch bottle.py to handle removal of `inspect.getargspec`, closes #128,
 see https://github.com/bottlepy/bottle/commit/fd78d672ebb362f0e5116ad7c0057da114b25b40
