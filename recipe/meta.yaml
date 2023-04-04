@@ -36,7 +36,7 @@ build:
     - gobject-introspection
     - gst-python
     - numpy
-  number: 5
+  number: 6
   skip: true  # [win]
 
 requirements:
@@ -60,7 +60,7 @@ requirements:
     - liblalinspiral >={{ lalinspiral_version }}
     - liblalsimulation >={{ lalsimulation_version }}
     - numpy
-    - pygobject >=3.22
+    - pygobject >=3.22,<3.36
     - python
     - python-lal
     - python-ligo-lw >={{ ligo_lw_version }}
@@ -87,7 +87,7 @@ requirements:
     - pandas
     - pluggy >={{ pluggy_version }}
     - pyfftw
-    - pygobject >=3.22
+    - pygobject >=3.22,<3.36
     - python
     - python-avahi
     - python-htcondor >={{ python_condor_version }}
