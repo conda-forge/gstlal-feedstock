@@ -24,6 +24,8 @@ source:
   patches:
     # backport https://git.ligo.org/lscsoft/gstlal/-/merge_requests/376
     - 0001-bottle-handle-getargspec-for-Python-3.11.patch
+    # backport https://git.ligo.org/lscsoft/gstlal/-/merge_requests/502
+    - 0002-gstlal.pipeio-fix-import-of-collections.abc.Iterable.patch
 
 build:
   error_overdepending: true
