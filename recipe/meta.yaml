@@ -1,5 +1,5 @@
 {% set name = "gstlal" %}
-{% set version = "1.11.0" %}
+{% set version = "1.12.0" %}
 
 # requirements (should match MIN_<> in configure.ac)
 {% set dqsegdb2_version = "1.0.1" %}
@@ -20,12 +20,7 @@ package:
 
 source:
   url: https://software.igwn.org/sources/source/{{ name }}-{{ version }}.tar.gz
-  sha256: 5550107205bf59592124387d6f16f3a0083a3fb5b05a5c5c401273a58f29c6c3
-  patches:
-    # backport https://git.ligo.org/lscsoft/gstlal/-/merge_requests/376
-    - 0001-bottle-handle-getargspec-for-Python-3.11.patch
-    # backport https://git.ligo.org/lscsoft/gstlal/-/merge_requests/502
-    - 0002-gstlal.pipeio-fix-import-of-collections.abc.Iterable.patch
+  sha256: 050df00327236b87bdeeacc83aa645b5e9965e4380e01eee7dfff06a5c6fc614
 
 build:
   error_overdepending: true
