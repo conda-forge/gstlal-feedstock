@@ -55,7 +55,7 @@ requirements:
     - liblalinspiral >={{ lalinspiral_version }}
     - liblalsimulation >={{ lalsimulation_version }}
     - numpy
-    - pygobject >=3.22
+    - pygobject >=3.22,<=3.46
     - python
     - python-lal
     - python-ligo-lw >={{ ligo_lw_version }}
@@ -82,7 +82,7 @@ requirements:
     - pandas
     - pluggy >={{ pluggy_version }}
     - pyfftw
-    - pygobject >=3.22
+    - pygobject >=3.22,<=3.46
     - python
     - python-avahi
     - python-htcondor >={{ python_condor_version }}
