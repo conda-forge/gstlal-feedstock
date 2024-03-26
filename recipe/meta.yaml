@@ -3,7 +3,7 @@
 
 # requirements (should match MIN_<> in configure.ac)
 {% set dqsegdb2_version = "1.0.1" %}
-{% set gwdatafind_version = "1.0.4" %}
+{% set gwdatafind_version = "1.1.0" %}
 {% set lal_version = "7.2.4" %}
 {% set lalmetaio_version = "3.0.2" %}
 {% set lalsimulation_version = "4.0.2" %}
