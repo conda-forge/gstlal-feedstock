@@ -1,9 +1,9 @@
 {% set name = "gstlal" %}
-{% set version = "1.12.0" %}
+{% set version = "1.13.0" %}
 
 # requirements (should match MIN_<> in configure.ac)
 {% set dqsegdb2_version = "1.0.1" %}
-{% set gwdatafind_version = "1.0.4" %}
+{% set gwdatafind_version = "1.1.0" %}
 {% set lal_version = "7.2.4" %}
 {% set lalmetaio_version = "3.0.2" %}
 {% set lalsimulation_version = "4.0.2" %}
@@ -20,7 +20,7 @@ package:
 
 source:
   url: https://software.igwn.org/sources/source/{{ name }}-{{ version }}.tar.gz
-  sha256: 050df00327236b87bdeeacc83aa645b5e9965e4380e01eee7dfff06a5c6fc614
+  sha256: 669617b05c123c3b95b1ae7538954e01b0ca2ca41cf3dea87ab1398eab1ca6a1
 
 build:
   error_overdepending: true
@@ -55,7 +55,7 @@ requirements:
     - liblalinspiral >={{ lalinspiral_version }}
     - liblalsimulation >={{ lalsimulation_version }}
     - numpy
-    - pygobject >=3.22
+    - pygobject >=3.22,<=3.46
     - python
     - python-lal
     - python-ligo-lw >={{ ligo_lw_version }}
@@ -82,7 +82,7 @@ requirements:
     - pandas
     - pluggy >={{ pluggy_version }}
     - pyfftw
-    - pygobject >=3.22
+    - pygobject >=3.22,<=3.46
     - python
     - python-avahi
     - python-htcondor >={{ python_condor_version }}
