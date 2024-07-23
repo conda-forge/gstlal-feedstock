@@ -30,7 +30,6 @@ source:
     - bottle-imp.patch
 
 build:
-  error_overdepending: true
   error_overlinking: true
   ignore_run_exports:
     # these are needed for the build, and at runtime,
