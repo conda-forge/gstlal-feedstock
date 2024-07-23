@@ -99,6 +99,9 @@ requirements:
     - python-ligo-lw >={{ ligo_lw_version }}
     - scipy
     - setuptools
+  run_constrained:
+    # https://github.com/conda-forge/backports-feedstock/issues/6
+    - setuptools <71.0.0  # [py<39]
 
 test:
   requires:
