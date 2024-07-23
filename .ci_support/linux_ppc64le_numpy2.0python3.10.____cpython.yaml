@@ -23,7 +23,7 @@ gsl:
 gstreamer:
 - '1.22'
 numpy:
-- '1.22'
+- '2.0'
 pin_run_as_build:
   python:
     min_pin: x.x
@@ -38,4 +38,4 @@ zip_keys:
 - - python
   - numpy
 zlib:
-- '1.2'
+- '1'
