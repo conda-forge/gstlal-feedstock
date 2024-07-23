@@ -30,15 +30,13 @@ source:
     - bottle-imp.patch
 
 build:
-  error_overdepending: true
   error_overlinking: true
   ignore_run_exports:
     # these are needed for the build, and at runtime,
     # but aren't actually directly linked against
     - gobject-introspection
     - gst-python
-    - numpy
-  number: 2
+  number: 3
   skip: true  # [win]
 
 requirements:
@@ -86,7 +84,7 @@ requirements:
     - liblalsimulation >={{ lalsimulation_version }}
     - ligo-segments >={{ ligo_segments_version }}
     - matplotlib-base
-    - {{ pin_compatible('numpy') }}
+    - numpy
     - pandas
     - pluggy >={{ pluggy_version }}
     - pyfftw
