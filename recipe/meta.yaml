@@ -37,7 +37,6 @@ build:
     # but aren't actually directly linked against
     - gobject-introspection
     - gst-python
-    - numpy
   number: 3
   skip: true  # [win]
 
@@ -86,6 +85,7 @@ requirements:
     - liblalsimulation >={{ lalsimulation_version }}
     - ligo-segments >={{ ligo_segments_version }}
     - matplotlib-base
+    - numpy
     - pandas
     - pluggy >={{ pluggy_version }}
     - pyfftw
