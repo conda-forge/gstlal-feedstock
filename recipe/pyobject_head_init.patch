@@ -1,0 +1,13 @@
+diff --git a/gstlal/python/sngltriggertable.c b/gstlal/python/sngltriggertable.c
+index 47be3a458..4b98e8eb0 100644
+--- a/gstlal/python/sngltriggertable.c
++++ b/gstlal/python/sngltriggertable.c
+@@ -309,7 +309,7 @@ static struct PyMethodDef methods[] = {
+ 
+ // Modified
+ static PyTypeObject gstlal_GSTLALSnglTrigger_Type = {
+-	PyObject_HEAD_INIT(NULL)
++	PyVarObject_HEAD_INIT(NULL, 0)
+ 	.tp_basicsize = sizeof(gstlal_GSTLALSnglTrigger),
+ 	.tp_doc = "GstLAL's GSTLALSnglTrigger type",
+ 	.tp_flags = Py_TPFLAGS_DEFAULT | Py_TPFLAGS_BASETYPE,
