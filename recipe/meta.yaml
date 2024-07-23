@@ -38,7 +38,7 @@ build:
     - gobject-introspection
     - gst-python
     - numpy
-  number: 2
+  number: 3
   skip: true  # [win]
 
 requirements:
@@ -86,7 +86,6 @@ requirements:
     - liblalsimulation >={{ lalsimulation_version }}
     - ligo-segments >={{ ligo_segments_version }}
     - matplotlib-base
-    - {{ pin_compatible('numpy') }}
     - pandas
     - pluggy >={{ pluggy_version }}
     - pyfftw
