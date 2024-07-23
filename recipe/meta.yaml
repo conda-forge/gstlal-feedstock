@@ -96,6 +96,7 @@ requirements:
     - python-lalsimulation >={{ lalsimulation_version }}
     - python-ligo-lw >={{ ligo_lw_version }}
     - scipy
+    - setuptools
 
 test:
   requires:
