@@ -31,12 +31,13 @@ build:
     - gobject-introspection
     - gst-python
     - numpy
-  number: 1
+  number: 2
   skip: true  # [win]
 
 requirements:
   build:
     - {{ compiler('c') }}
+    - {{ stdlib("c") }}
     - pkg-config >=0.18.0
     - make
   host:
@@ -78,7 +79,6 @@ requirements:
     - liblalsimulation >={{ lalsimulation_version }}
     - ligo-segments >={{ ligo_segments_version }}
     - matplotlib-base
-    - {{ pin_compatible('numpy') }}
     - pandas
     - pluggy >={{ pluggy_version }}
     - pyfftw
