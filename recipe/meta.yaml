@@ -104,6 +104,8 @@ requirements:
 test:
   requires:
     - pkg-config
+    # gstreamer-tag-1.0 pkg-config needs zlib
+    - zlib
   commands:
     # set variables
     - export TMPDIR=$(python -c "import tempfile; print(tempfile.gettempdir())")
