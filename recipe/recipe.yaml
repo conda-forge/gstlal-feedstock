@@ -1,0 +1,153 @@
+schema_version: 1
+
+context:
+  name: gstlal
+  version: 1.13.0
+  # requirements (should match MIN_<> in configure.ac)
+  dqsegdb2_version: 1.0.1
+  gwdatafind_version: 1.1.0
+  lal_version: 7.2.4
+  lalmetaio_version: 3.0.2
+  lalsimulation_version: 4.0.2
+  lalburst_version: 1.7.0
+  lalinspiral_version: 3.0.2
+  ligo_segments_version: 1.2.0
+  pluggy_version: 0.6.0
+  python_condor_version: 8.9.0
+  ligo_lw_version: 1.8.3
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://software.igwn.org/sources/source/${{ name }}-${{ version }}.tar.gz
+  sha256: 669617b05c123c3b95b1ae7538954e01b0ca2ca41cf3dea87ab1398eab1ca6a1
+  patches:
+    # update use of imp module in py-compile (autoconf)
+    - py-compile-imp.patch
+    # fix incompatible pointer error for Python 3.12
+    - pyobject_head_init.patch
+    # backport https://git.ligo.org/lscsoft/gstlal/-/merge_requests/610
+    - bottle-imp.patch
+
+build:
+  number: 6
+  skip:
+    - win
+    # pygobject maximum pin prevents Python 3.13 usage
+    - match(python, ">=3.13")
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ stdlib('c') }}
+    - make
+    - pkg-config >=0.18.0
+  host:
+    - fftw
+    - glib
+    - gobject-introspection >=1.30.0
+    - gsl
+    - gstreamer
+    - gstreamer-orc
+    - gst-plugins-base ${{ gstreamer }}.*
+    - gst-python
+    - libglib
+    - liblal >=${{ lal_version }}
+    - liblalmetaio >=${{ lalmetaio_version }}
+    - liblalburst >=${{ lalburst_version }}
+    - liblalinspiral >=${{ lalinspiral_version }}
+    - liblalsimulation >=${{ lalsimulation_version }}
+    - numpy
+    - pygobject >=3.22,<=3.46
+    - python
+    - python-lal
+    - python-ligo-lw >=${{ ligo_lw_version }}
+    - zlib
+  run:
+    - dqsegdb2 >=${{ dqsegdb2_version }}
+    - fftw
+    - gobject-introspection >=1.30.0
+    - gsl
+    - gstreamer-orc
+    - gst-plugins-good ${{ gstreamer }}.*
+    - gst-python
+    - gwdatafind >=${{ gwdatafind_version }}
+    - igwn-ligolw  # for lal
+    - jinja2
+    - libglib
+    - liblal >=${{ lal_version }}
+    - liblalmetaio >=${{ lalmetaio_version }}
+    - liblalburst >=${{ lalburst_version }}
+    - liblalinspiral >=${{ lalinspiral_version }}
+    - liblalsimulation >=${{ lalsimulation_version }}
+    - ligo-segments >=${{ ligo_segments_version }}
+    - matplotlib-base
+    - numpy
+    - pandas
+    - pluggy >=${{ pluggy_version }}
+    - pyfftw
+    - pygobject >=3.22,<=3.46
+    - python
+    - python-avahi
+    - python-htcondor >=${{ python_condor_version }}
+    - python-lal >=${{ lal_version }}
+    - python-lalsimulation >=${{ lalsimulation_version }}
+    - python-ligo-lw >=${{ ligo_lw_version }}
+    - scipy
+    - setuptools
+  ignore_run_exports:
+    by_name:
+      - gobject-introspection
+      - gst-python
+
+tests:
+  - requirements:
+      run:
+        - pkg-config
+        - zlib
+    script:
+      - "export TMPDIR=$(python -c \"import tempfile; print(tempfile.gettempdir())\")"
+      - export GSTLAL_FIR_WHITEN=0
+      - gstlal_asd_txt_from_psd_xml --help
+      - gstlal_dagfile_rerun_relatives --help
+      - gstlal_fake_frames --help
+      - gstlal_fake_frames_workflow --help
+      - gstlal_grid_profile --help
+      - gstlal_launch --help
+      - gstlal_ligo_data_find_check --help
+      - gstlal_play --help
+      - gstlal_plot_psd --help
+      - gstlal_psd_polyfit --help
+      - gstlal_psd_workflow --help
+      - gstlal_psd_xml_from_asd_txt --help
+      - gstlal_query_dqsegdb_segments --help
+      - gstlal_query_dqsegdb_veto_segments --help
+      - gstlal_query_gwosc_segments --help
+      - gstlal_query_gwosc_veto_segments --help
+      - gstlal_reference_psd --help
+      - gstlal_spectrum_movie --help
+      - pkg-config --print-errors --exact-version ${{ version }} gstlal
+
+about:
+  summary: GStreamer for GW data analysis
+  description: |
+    This package provides a variety of gstreamer elements for
+    gravitational-wave data analysis and some libraries to help write
+    such elements.  The code here sits on top of several other libraries,
+    notably the LIGO Algorithm Library (LAL), FFTW, the GNU Scientific
+    Library (GSL), and, of course, GStreamer.
+    This package contains the plugins and shared libraries required to run
+    gstlal-based applications.
+  homepage: https://lscsoft.docs.ligo.org/gstlal/
+  repository: https://git.ligo.org/lscsoft/gstlal/
+  documentation: https://lscsoft.docs.ligo.org/gstlal/
+  license: GPL-2.0-or-later
+  license_file: COPYING
+
+extra:
+  recipe-maintainers:
+    - aepace
+    - duncanmmacleod
+    - myNameIsPatrick
