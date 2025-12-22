@@ -33,7 +33,10 @@ source:
 
 build:
   number: 6
-  skip: win
+  skip:
+    - win
+    # pygobject maximum pin prevents Python 3.13 usage
+    - match(python, ">=3.13")
 
 requirements:
   build:
