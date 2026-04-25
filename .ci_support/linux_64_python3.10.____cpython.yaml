@@ -19,7 +19,7 @@ glib:
 gsl:
 - '2.7'
 gstreamer:
-- '1.26'
+- '1.28'
 numpy:
 - '2'
 pin_run_as_build:
