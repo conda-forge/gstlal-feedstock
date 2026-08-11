@@ -32,7 +32,7 @@ source:
     - bottle-imp.patch
 
 build:
-  number: 6
+  number: 7
   skip:
     - win
     # pygobject maximum pin prevents Python 3.13 usage
