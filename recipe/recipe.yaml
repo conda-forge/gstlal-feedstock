@@ -13,7 +13,7 @@ context:
   lalinspiral_version: 3.0.2
   ligo_segments_version: 1.2.0
   pluggy_version: 0.6.0
-  python_condor_version: 8.9.0
+  python_htcondor_version: 8.9.0,<25.0.0a0
   ligo_lw_version: 1.8.3
 
 package:
@@ -91,12 +91,12 @@ requirements:
     - pygobject >=3.22,<=3.46
     - python
     - python-avahi
-    - python-htcondor >=${{ python_condor_version }}
+    - python-htcondor >=${{ python_htcondor_version }}
     - python-lal >=${{ lal_version }}
     - python-lalsimulation >=${{ lalsimulation_version }}
     - python-ligo-lw >=${{ ligo_lw_version }}
     - scipy
-    - setuptools
+    - setuptools <82.0.0a0
   ignore_run_exports:
     by_name:
       - gobject-introspection
